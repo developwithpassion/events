@@ -1,10 +1,9 @@
 # Events
 
-The `events` library defines a simple api for an in-memory observer mechanism
+The `events` library defines a simple observer api
 
 ## TODO
 
-Document the attribute visibility syntax and the default value syntax
 
 ## License
 
