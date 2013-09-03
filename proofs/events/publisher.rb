@@ -24,6 +24,7 @@ module PublisherProofs
     class FakeHandler
       include Initializer
       initializer :handles
+
       def handle_some_event(event)
         @event = event
       end
@@ -98,6 +99,26 @@ heading 'Publishing an event' do
     sut.prove do 
       published_event?(handler, event) &&
         ! published_event?(non_handler, event)
+    end
+  end
+end
+
+heading 'Publishing a named event with data' do
+  event_name = :some_event
+  data = build.event
+  handler = build.handler(true)
+  non_handler = build.handler(false)
+
+
+  sut = build.sut
+  sut.add_subscriber(handler)
+  sut.add_subscriber(non_handler)
+
+  sut.publish(:some_event, data)
+  proof 'Triggers the handler method for each of the subscribers that respond to the event' do
+    sut.prove do 
+      published_event?(handler, data) &&
+        ! published_event?(non_handler, data)
     end
   end
 end

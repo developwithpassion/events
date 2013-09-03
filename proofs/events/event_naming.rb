@@ -2,9 +2,7 @@ require_relative '../proofs_init'
 
 title 'Event Naming'
 
-
 module EventNamingProofs
-
   module Builder
     extend self
 
