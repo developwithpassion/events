@@ -1,6 +1,8 @@
 module Events
   module Publisher
-    include EventNaming
+    def self.included(base)
+      base.send :include, EventNaming
+    end
 
     def subscribers
       @subscribers ||= []
