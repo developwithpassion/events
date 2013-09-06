@@ -6,7 +6,6 @@ module PublisherProofs
   module Builder
     extend self
 
-
     class SomeAggregator
       include ::Events::Publisher
 
