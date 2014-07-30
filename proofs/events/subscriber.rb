@@ -9,8 +9,8 @@ module SubscriberProofs
     class SomeSubscriber
       include ::Events::Subscriber
 
-      def handle_some_event(event)
-        @event = event
+      handle :some_event do |message|
+        @event = message
       end
 
       module Proof
@@ -35,5 +35,15 @@ heading 'Handlers' do
     sut = build.subscriber
 
     sut.prove { handles?(:some_event)}
+  end
+
+  proof 'Can handle an event' do
+    sut = build.subscriber
+
+    data = {}
+
+    sut.handle_some_event(data)
+
+    sut.prove { handled?(data)}
   end
 end
